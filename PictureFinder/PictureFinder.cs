@@ -36,11 +36,14 @@ namespace PictureFinder
         }
         private void PictureBoxCheck()
         {
-            if (ImagePath != null)
+            if (ImagePath != "null")
             {
+                
                 Bitmap bitmap = new Bitmap(ImagePath);
                 pbImage.Image = bitmap;
+                
             }
+            
         }
         private void CheckDelete()
         {
@@ -55,7 +58,8 @@ namespace PictureFinder
             if(openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 Bitmap bitmap = new Bitmap(openFileDialog.FileName);
-                pbImage.Image = bitmap;  
+                pbImage.Image = bitmap;
+                ActiveForm.Size = pbImage.Image.Size;
             }
             
             CheckDelete();
@@ -72,7 +76,7 @@ namespace PictureFinder
             if (pbImage != null)
                 ImagePath = openFileDialog.FileName;
             else
-                ImagePath = null;
+                ImagePath = "null";
 
             Settings.Default.Save();
         }

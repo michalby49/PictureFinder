@@ -76,7 +76,7 @@ namespace PictureFinder
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnBrowser);
             this.Name = "PictureFinder";
-            this.Text = "Form1";
+            this.Text = "Picture Finder";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PictureFinder_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
             this.ResumeLayout(false);
