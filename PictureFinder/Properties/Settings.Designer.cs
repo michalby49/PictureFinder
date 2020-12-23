@@ -25,13 +25,25 @@ namespace PictureFinder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"null\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
         public string ImagePath {
             get {
                 return ((string)(this["ImagePath"]));
             }
             set {
                 this["ImagePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("816, 489")]
+        public global::System.Drawing.Size DefaultSize {
+            get {
+                return ((global::System.Drawing.Size)(this["DefaultSize"]));
+            }
+            set {
+                this["DefaultSize"] = value;
             }
         }
     }

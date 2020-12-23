@@ -1,19 +1,20 @@
 ﻿using PictureFinder.Properties;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PictureFinder
 {
     public partial class PictureFinder : Form
     {
-        private OpenFileDialog openFileDialog = new OpenFileDialog();      
+        private OpenFileDialog openFileDialog = new OpenFileDialog();
+        public Size DefaultSize
+        {
+            get
+            {
+                return Settings.Default.DefaultSize;
+            }
+        }
         public string ImagePath
         {
             get
@@ -29,22 +30,31 @@ namespace PictureFinder
         {
             InitializeComponent();
 
-            openFileDialog.FileName = ImagePath;
-            PictureBoxCheck();
+            CheckLastPicture();
 
             CheckDelete();
+            
         }
-        private void PictureBoxCheck()
+
+        private void CheckLastPicture()
         {
-            if (ImagePath != "null")
+            if(ImagePath != "")
             {
-                
+                openFileDialog.FileName = ImagePath;
                 Bitmap bitmap = new Bitmap(ImagePath);
                 pbImage.Image = bitmap;
                 
             }
-            
+
         }
+
+        private void SetFormSize(Size size)
+        {
+            
+            ActiveForm.Size = size;
+        }
+
+       
         private void CheckDelete()
         {
             if (pbImage.Image == null)
@@ -59,7 +69,7 @@ namespace PictureFinder
             {
                 Bitmap bitmap = new Bitmap(openFileDialog.FileName);
                 pbImage.Image = bitmap;
-                ActiveForm.Size = pbImage.Image.Size;
+                SetFormSize(pbImage.Image.Size);
             }
             
             CheckDelete();
@@ -68,17 +78,27 @@ namespace PictureFinder
         private void btnDelete_Click(object sender, EventArgs e)
         {
             pbImage.Image = null;
+            SetFormSize(DefaultSize);
             CheckDelete();
         }
 
         private void PictureFinder_FormClosed(object sender, FormClosedEventArgs e)
         {  
-            if (pbImage != null)
+            if (pbImage.Image != null)
                 ImagePath = openFileDialog.FileName;
             else
-                ImagePath = "null";
+                ImagePath = null;
 
             Settings.Default.Save();
+        }
+
+        private void PictureFinder_Activated(object sender, EventArgs e)
+        {
+            if (pbImage.Image != null)
+            {
+                SetFormSize(pbImage.Image.Size);
+            }
+            
         }
     }
 }
